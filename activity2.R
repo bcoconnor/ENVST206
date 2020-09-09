@@ -162,13 +162,15 @@ qnorm(0.95,
       sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
 
 
-#question 6
+#question 7
 #find total annual precip by site and year
 totalPRCP <- aggregate(datW$PRCP, by=list(datW$NAME, datW$year), FUN="sum",na.rm=TRUE)
 colnames(totalPRCP) <- c("NAME", "YEAR", "SITE")
 totalPRCP
 
+#question 6
 #histogram of annual precip for Aberdeen site
+# ERROR "'X' MUST BE NUMERIC"
 hist(totalPRCP$PRCP[totalPRCP$NAME == 1],
      freq=FALSE, 
      main = paste(levels(datW$totalPRCP)[1]),
