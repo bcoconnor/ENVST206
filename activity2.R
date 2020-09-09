@@ -130,4 +130,50 @@ hist(datW$TAVE[datW$siteN == 4],
 
 
 
+help(dnorm)
+
+#pnorm(value to evaluate at (note this will evaluate for all values and below),mean, standard deviation)
+pnorm(0,
+      mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
+      sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
+
+#pnrom with 5 gives me all probability (area of the curve) below 5 
+pnorm(5,
+      mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
+      sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
+
+#pnrom with 5 gives me all probability (area of the curve) below 5 
+pnorm(5,
+      mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
+      sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE)) - pnorm(0,
+        mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
+        sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
+
+#pnrom of 20 gives me all probability (area of the curve) below 20 
+#subtracting from one leaves me with the area above 20
+1 - pnorm(20,
+          mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
+          sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
+
+#qnorm gives me the value at which all values and below equal the probability in my argument
+#Here I'm calculating the value of the 95th quantile or a probability of 0.95
+qnorm(0.95,
+      mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
+      sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
+
+
+#question 6
+#find total annual precip by site and year
+totalPRCP <- aggregate(datW$PRCP, by=list(datW$NAME, datW$year), FUN="sum",na.rm=TRUE)
+colnames(totalPRCP) <- c("NAME", "YEAR", "SITE")
+totalPRCP
+
+#histogram of annual precip for Aberdeen site
+hist(totalPRCP$PRCP[totalPRCP$NAME == 1],
+     freq=FALSE, 
+     main = paste(levels(datW$totalPRCP)[1]),
+     xlab = "Average Precipitation (mm)", 
+     ylab="Relative frequency",
+     col="grey75",
+     border="white")
 
