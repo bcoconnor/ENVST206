@@ -162,6 +162,20 @@ qnorm(0.95,
       sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
 
 
+#question5
+#finding high temp threshold using qnorm
+hightemp_threshold <- qnorm(0.95,
+      mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
+      sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
+hightemp_threshold
+
+#probability of temps above high temp threshold with new mean
+1 - pnorm(hightemp_threshold,
+          mean(datW$TAVE[datW$siteN == 1] + 4,na.rm=TRUE),
+          sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
+
+
+
 #question 7
 #find total annual precip by site and year
 totalPRCP <- aggregate(datW$PRCP, by=list(datW$NAME, datW$year), FUN="sum",na.rm=TRUE)
