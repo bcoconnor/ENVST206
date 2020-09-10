@@ -162,8 +162,9 @@ qnorm(0.95,
       sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
 
 
+
 #question5
-#finding high temp threshold using qnorm
+#finding high temp threshold using qnorm above 95%
 hightemp_threshold <- qnorm(0.95,
       mean(datW$TAVE[datW$siteN == 1],na.rm=TRUE),
       sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
@@ -175,21 +176,55 @@ hightemp_threshold
           sd(datW$TAVE[datW$siteN == 1],na.rm=TRUE))
 
 
+#question 6
+#histogram of annual precip for Aberdeen site
+hist(datW$PRCP[datW$siteN == 1],
+     freq=FALSE, 
+     main = paste(levels(datW$NAME)[1]),
+     xlab = "Average daily precipitation (mm)", 
+     ylab="Relative frequency",
+     col="grey75",
+     border="white")
+
 
 #question 7
 #find total annual precip by site and year
 totalPRCP <- aggregate(datW$PRCP, by=list(datW$NAME, datW$year), FUN="sum",na.rm=TRUE)
-colnames(totalPRCP) <- c("NAME", "YEAR", "SITE")
+colnames(totalPRCP) <- c("NAME", "YEAR", "PRCP")
 totalPRCP
 
-#question 6
-#histogram of annual precip for Aberdeen site
-# ERROR "'X' MUST BE NUMERIC"
-hist(totalPRCP$PRCP[totalPRCP$NAME == 1],
+#question 8
+#Aberdeen annual precip histogram
+hist(totalPRCP$PRCP[totalPRCP$NAME == "ABERDEEN, WA US"],
      freq=FALSE, 
-     main = paste(levels(datW$totalPRCP)[1]),
-     xlab = "Average Precipitation (mm)", 
+     main = "ABERDEEN, WA US",
+     xlab = "Annual precipitation (mm)", 
      ylab="Relative frequency",
      col="grey75",
      border="white")
+
+#Mandan Experimental Station ND annual precip histogram
+hist(totalPRCP$PRCP[totalPRCP$NAME == "MANDAN EXPERIMENT STATION, ND US"],
+     freq=FALSE, 
+     main = "MANDAN EXPERIMENT STATION, ND US",
+     xlab = "Annual precipitation (mm)", 
+     ylab="Relative frequency",
+     col="grey75",
+     border="white")
+
+
+#question 9
+#Aderdeen probability of 700mm or less
+pnorm(700,
+      mean(totalPRCP$PRCP[totalPRCP$NAME == "ABERDEEN, WA US"],na.rm=TRUE),
+      sd(totalPRCP$PRCP[totalPRCP$NAME == "ABERDEEN, WA US"],na.rm=TRUE)) - pnorm(0,
+      mean(totalPRCP$PRCP[totalPRCP$NAME == "ABERDEEN, WA US"],na.rm=TRUE),
+      sd(totalPRCP$PRCP[totalPRCP$NAME == "ABERDEEN, WA US"],na.rm=TRUE))
+
+#Mandan probability of 700mm or less
+pnorm(700,
+      mean(totalPRCP$PRCP[totalPRCP$NAME == "MANDAN EXPERIMENT STATION, ND US"],na.rm=TRUE),
+      sd(totalPRCP$PRCP[totalPRCP$NAME == "MANDAN EXPERIMENT STATION, ND US"],na.rm=TRUE)) - pnorm(0,
+      mean(totalPRCP$PRCP[totalPRCP$NAME == "MANDAN EXPERIMENT STATION, ND US"],na.rm=TRUE),
+      sd(totalPRCP$PRCP[totalPRCP$NAME == "MANDAN EXPERIMENT STATION, ND US"],na.rm=TRUE))
 
