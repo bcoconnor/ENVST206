@@ -12,7 +12,7 @@ plot(ch4$CH4_Flux ~ ch4$herbivory, xlab ="Treatment",
 shapiro.test(ch4$CH4_Flux[ch4$herbivory == "Ctl"])
 
 help(t.test)
-#shapiro-wilk test on grazing exclusion plots
+r#shapiro-wilk test on grazing exclusion plots
 shapiro.test(ch4$CH4_Flux[ch4$herbivory == "Ex"])
 
 #use bartlett test since testing for equal variance
@@ -23,9 +23,25 @@ t.test(ch4$CH4_Flux ~ ch4$herbivory)
 
 #read in insect data
 datI <- read.csv("/Users/brynnoconnor/Documents/ENVSTDATA/ao3/insect_richness.csv")
+datI
 
 #column names to factor
 datI$urbanName <- as.factor(datI$urbanName)
+
+
+#question 4
+#mean values wtihin each group
+mean(datI$Richness[datI$urbanName == "Suburban"])
+mean(datI$Richness[datI$urbanName == "Dense"])
+mean(datI$Richness[datI$urbanName == "Developed"])
+
+#mean values among groups
+mean(datI$Richness)
+
+#f-value from f-ratio - look at p-value
+
+
+
 
 #specify model for species richness and urban type
 in.mod <- lm(datI$Richness ~ datI$urbanName)
