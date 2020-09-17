@@ -11,8 +11,7 @@ plot(ch4$CH4_Flux ~ ch4$herbivory, xlab ="Treatment",
 #shapiro-wilk test on grazing plots
 shapiro.test(ch4$CH4_Flux[ch4$herbivory == "Ctl"])
 
-help(t.test)
-r#shapiro-wilk test on grazing exclusion plots
+#shapiro-wilk test on grazing exclusion plots
 shapiro.test(ch4$CH4_Flux[ch4$herbivory == "Ex"])
 
 #use bartlett test since testing for equal variance
@@ -30,16 +29,20 @@ datI$urbanName <- as.factor(datI$urbanName)
 
 
 #question 4
-#mean values wtihin each group
-mean(datI$Richness[datI$urbanName == "Suburban"])
-mean(datI$Richness[datI$urbanName == "Dense"])
-mean(datI$Richness[datI$urbanName == "Developed"])
+#shapiro-wilk test on suburban
+shapiro.test(datI$Richness[datI$urbanName == "Suburban"])
 
-#mean values among groups
-mean(datI$Richness)
+#shapiro-wilk test on developed
+shapiro.test(datI$Richness[datI$urbanName == "Developed"])
 
-#f-value from f-ratio - look at p-value
+#shapiro-wilk test on dense
+shapiro.test(datI$Richness[datI$urbanName == "Dense"])
 
+#shapiro-wilk test on natural
+shapiro.test(datI$Richness[datI$urbanName == "Natural"])
+
+#use bartlett test since testing for equal variance
+bartlett.test(datI$Richness ~ datI$urbanName)
 
 
 
@@ -73,6 +76,4 @@ mosaicplot(species, xlab="population status", ylab="legal protection",
 
 #Conduct a chi-squared test
 chisq.test(species)
-
-
 
