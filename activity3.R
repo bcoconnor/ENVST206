@@ -64,10 +64,11 @@ plot(tukeyT, cex.axis=0.75)
 #calculating means across factor data simultaneously in R
 tapply(datI$Richness, datI$urbanName, "mean")
 
-#set up contigency table
+#set up contingency table
 species <- matrix(c(18,8,15,32), ncol=2, byrow = TRUE) 
 colnames(species) <- c("Not protected", "Protected")
 rownames(species) <- c("Declining", "Stable/Increase")
+species
 
 #make a mosaic plot with an informative title and axes labels
 mosaicplot(species, xlab="population status", ylab="legal protection",
