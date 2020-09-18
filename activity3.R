@@ -45,7 +45,6 @@ shapiro.test(datI$Richness[datI$urbanName == "Natural"])
 bartlett.test(datI$Richness ~ datI$urbanName)
 
 
-
 #specify model for species richness and urban type
 in.mod <- lm(datI$Richness ~ datI$urbanName)
 #run the ANOVA
