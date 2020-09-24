@@ -63,8 +63,6 @@ plot(pheno$Prcp,pheno$doy,
      xlab =  "Precipitation (mm)")
 
 #question 3
-#set up panel of plots with two rows and two columns
-par(mfrow=c(2,2))
 #doy relation to latitude plot
 plot(pheno$Lat,pheno$doy, 
      pch = 19, 
@@ -83,12 +81,9 @@ plot(pheno$Tmax,pheno$doy,
      col = "royalblue4",
      ylab = "Day of leaf out",
      xlab =  "Maximum temperature (C)")
-#doy relation to site description plot
-plot(pheno$siteDesc,pheno$doy, 
-     pch = 19, 
-     col = "royalblue4",
-     ylab = "Day of leaf out",
-     xlab =  "Maximum temperature (C)")
+#doy relation to site description box plot
+boxplot(pheno$doy ~ pheno$siteDesc, xlab ="Site Description (Rural/Urban)", 
+     ylab="Day of leaf out")
 
 
 dev.off()
