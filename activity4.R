@@ -102,21 +102,21 @@ pheno$urID <- ifelse(pheno$siteDesc == "Urban",1,0)
 #question 6
 #set up multiple regression
 mlr <- lm(pheno$doy ~  pheno$Tmax  + pheno$Prcp + pheno$elev + pheno$urID)
-
 #calculate fitted values from regression line for each observation
 mlFitted <- fitted(mlr)
-
 #set up qq plot to check assumptions
 qqnorm(mlFitted)
 #add qq line to check assumptions
 qqline(mlFitted)
-
-#make residual plot
-plot(mlr, mlFitted, 
+#make residual plot to check assumptions
+plot(pheno$doy, pheno$urID, 
      xlab = "day of leaf out", 
      ylab = "standardized residual")
 #add a horizontal line at zero
 abline(h=0)
+
+#question 7/8
+summary(mlr)
 
 
 
