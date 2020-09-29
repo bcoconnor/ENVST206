@@ -151,10 +151,12 @@ ny <- temp[temp$NAME == nameS[2], ]
 plot(nd$year, nd$TMAX,
      type = "b",
      pch = 19,
-     ylab = "Annual Temperature (mm)",
+     main = "Annual Mean Temperature vs. Year",
+     ylab = "Annual Mean Temperature (Celsius)",
      xlab = "Year", 
      yaxt = "n",
      ylim =c(5, 30))
+ 
 #add y axis
 axis(2, seq(5,30, by=5), las=2 )
 #add new york
