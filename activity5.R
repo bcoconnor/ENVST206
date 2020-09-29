@@ -201,4 +201,48 @@ ggplot(data = pr, aes(x = year, y=totalP, color=NAME ) )+
   theme_classic()+
   scale_color_manual(values = c("#FF33CC","#FF9900", "#6633FF", "#66CC33","#3498DB"))
 
+library(ggplot2)
+#ggplot violin plot 
+ggplot(data = datW, aes(x=NAME, y=TMIN))+ #look at daily tmin
+  geom_violin(fill=rgb(0.933,0.953,0.98))+ #add a violin plot with blue color
+  geom_boxplot(width=0.2,size=0.25, fill="grey90")+ #add grey boxplots and make them about 20% smaller than normal with 25% thinner lines than normal
+  theme_classic() #git rid of ugly gridlines
+
+sub <- datW[datW$NAME == nameS[4] & datW$ year == 1974,]
+
+#specify date format
+#%Y means a four number year 
+#- indicates that the date uses dashes to seperate
+#%m means month
+#%d means day
+sub$DATE <- as.Date(sub$DATE,"%Y-%m-%d")
+
+#question 7
+ggplot(data=sub, aes(x=DATE, y=TMAX))+
+  geom_point()+
+  geom_path()+
+  theme_classic()+
+  labs(x="year", y="Maximimum temperature (C)")
+#bar plot
+ggplot(data=sub, aes(x=DATE, y=PRCP))+
+  geom_col(fill="royalblue3")+
+  theme_classic()+
+  labs(x="year", y="Daily precipitation (mm)")
+
+#question 8
+#california data
+sub2 <- datW[datW$NAME == nameS[2] & datW$ year == 1974,]
+sub2$DATE <- as.Date(sub2$DATE,"%Y-%m-%d")
+
+#temperature plot
+ggplot(data=sub2, aes(x=DATE, y=TMAX))+
+  geom_point()+
+  geom_path()+
+  theme_classic()+
+  labs(x="year", y="Maximimum temperature (C)")
+#bar plot
+ggplot(data=sub2, aes(x=DATE, y=PRCP))+
+  geom_col(fill="royalblue3")+
+  theme_classic()+
+  labs(x="year", y="Daily precipitation (mm)")
 
