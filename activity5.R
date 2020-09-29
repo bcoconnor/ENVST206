@@ -156,7 +156,6 @@ plot(nd$year, nd$TMAX,
      xlab = "Year", 
      yaxt = "n",
      ylim =c(5, 30))
- 
 #add y axis
 axis(2, seq(5,30, by=5), las=2 )
 #add new york
@@ -164,7 +163,6 @@ points(ny$year, ny$TMAX,
        type = "b",
        pch = 19,
        col="tomato3")
-
 #add legend
 legend("topleft", #position
        c("North Dakota", "New York"), #labels
@@ -173,5 +171,34 @@ legend("topleft", #position
        lwd=1, #line thickness 1, anytime both point & line arguments are given both will be drawn
        bty="n") #always use this argument otherwise an ugly box is drawn
 
+#ggplot2 plotting
+ggplot(data = pr, aes(x = year, y=totalP, color=NAME ) )+ #data for plot
+  geom_point()+ #make points at data point
+  geom_path()+ #use lines to connect data points
+  labs(x="year", y="Annual Precipitation") #make axis labels
+
+#get rid of grey gridlines
+ggplot(data = pr, aes(x = year, y=totalP, color=NAME ) )+ #data for plot
+  geom_point()+ #make points at data point
+  geom_path()+ #use lines to connect data points
+  labs(x="year", y="Annual Precipitation")+ #make axis labels
+  theme_classic() #change plot theme
+
+#make semi-transparent points
+ggplot(data = pr, aes(x = year, y=totalP, color=NAME ) )+
+  geom_point(alpha=0.5)+
+  geom_path(alpha=0.5)+
+  labs(x="year", y="Annual Precipitation")+
+  theme_classic()+
+  scale_color_manual(values = c("#7FB3D5","#34495E", "#E7B800", "#FC4E07","#26A69A"))
+
+#question 5
+#change color of points
+ggplot(data = pr, aes(x = year, y=totalP, color=NAME ) )+
+  geom_point(alpha=0.5)+
+  geom_path(alpha=0.5)+
+  labs(x="year", y="Annual Precipitation")+
+  theme_classic()+
+  scale_color_manual(values = c("#FF33CC","#FF9900", "#6633FF", "#66CC33","#3498DB"))
 
 
