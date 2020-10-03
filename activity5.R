@@ -22,7 +22,6 @@ colnames(precip) <- c("NAME","year","totalP")
 #add the x column from aggregate looking at the length of observations in each year
 precip$ncount <- aggregate(datP$PRCP, by=list(datP$NAME,datP$year), FUN="length")$x
 
-
 #make a new dataframe, remove years with too many missing precip data
 pr <- precip[precip$ncount >=364, ]
 
@@ -231,7 +230,7 @@ ggplot(data=sub, aes(x=DATE, y=PRCP))+
 
 #question 8
 #california data
-sub2 <- datW[datW$NAME == nameS[2] & datW$ year == 1974,]
+sub2 <- datW[datW$NAME == nameS[2] & datW$year == 1974,]
 sub2$DATE <- as.Date(sub2$DATE,"%Y-%m-%d")
 
 #temperature plot
@@ -245,4 +244,21 @@ ggplot(data=sub2, aes(x=DATE, y=PRCP))+
   geom_col(fill="royalblue3")+
   theme_classic()+
   labs(x="year", y="Daily precipitation (mm)")
+
+
+#question 9
+#daily min temperatures over last 20 years (2000-2020)
+
+
+#min temp plot
+#temperature plot
+ggplot(data=   , aes(x=DATE, y=TMIN))+
+  geom_point()+
+  geom_path()+
+  theme_classic()+
+  labs(x="year", y="Minimum temperature (C)")
+
+
+
+
 
