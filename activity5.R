@@ -118,7 +118,6 @@ legend("topleft", #position
        bty="n") #always use this argument otherwise an ugly box is drawn
 
 
-
 #question 3 - plot ny and nd
 #make a dataframe with just temperature, year, and site name
 #remove NA using na.omit
@@ -150,8 +149,8 @@ ny <- temp[temp$NAME == nameS[2], ]
 plot(nd$year, nd$TMAX,
      type = "b",
      pch = 19,
-     main = "Annual Mean Temperature vs. Year",
-     ylab = "Annual Mean Temperature (Celsius)",
+     main = "Annual Mean Maximum Temperature vs. Year",
+     ylab = "Annual Mean Maximum Temperature (C)",
      xlab = "Year", 
      yaxt = "n",
      ylim =c(5, 30))
@@ -248,17 +247,18 @@ ggplot(data=sub2, aes(x=DATE, y=PRCP))+
 
 #question 9
 #daily min temperatures over last 20 years (2000-2020)
+datTMIN <- na.omit(data.frame(NAME=datW$NAME,
+                           year=datW$year,
+                           date=datW$DATE,
+                           TMIN=datW$TMIN))
 
+subTMIN <- datTMIN[datTMIN$NAME == nameS[2] & datTMIN$year >= 2000,]
 
-#min temp plot
-#temperature plot
-ggplot(data=   , aes(x=DATE, y=TMIN))+
+library(ggplot2)
+ggplot(data=subTMIN, aes(x=date, y=TMIN))+
   geom_point()+
-  geom_path()+
   theme_classic()+
   labs(x="year", y="Minimum temperature (C)")
-
-
 
 
 
