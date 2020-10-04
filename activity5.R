@@ -257,6 +257,7 @@ subTMIN <- datTMIN[datTMIN$NAME == nameS[2] & datTMIN$year >= 2000,]
 library(ggplot2)
 ggplot(data=subTMIN, aes(x=date, y=TMIN))+
   geom_point()+
+  geom_path()+
   theme_classic()+
   labs(x="year", y="Minimum temperature (C)")
 
