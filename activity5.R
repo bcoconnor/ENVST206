@@ -249,15 +249,12 @@ ggplot(data=sub2, aes(x=DATE, y=PRCP))+
 #daily min temperatures over last 20 years (2000-2020)
 datTMIN <- na.omit(data.frame(NAME=datW$NAME,
                            year=datW$year,
-                           date=datW$DATE,
                            TMIN=datW$TMIN))
 
 subTMIN <- datTMIN[datTMIN$NAME == nameS[2] & datTMIN$year >= 2000,]
 
-library(ggplot2)
-ggplot(data=subTMIN, aes(x=date, y=TMIN))+
+ggplot(data=subTMIN, aes(x=year, y=TMIN))+
   geom_point()+
-  geom_path()+
   theme_classic()+
   labs(x="year", y="Minimum temperature (C)")
 
