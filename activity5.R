@@ -143,7 +143,7 @@ ggplot(data = TMAX, aes(x = year, y=TMAX, color=NAME ) )+ #data for plot
   labs(x="year", y="Max Temp") #make axis labels
 
 nd <- temp[temp$NAME == nameS[3], ]
-ny <- temp[temp$NAME == nameS[2], ]
+ny <- temp[temp$NAME == nameS[5], ]
 
 #add north dakota
 plot(nd$year, nd$TMAX,
@@ -153,9 +153,9 @@ plot(nd$year, nd$TMAX,
      ylab = "Annual Mean Maximum Temperature (C)",
      xlab = "Year", 
      yaxt = "n",
-     ylim =c(5, 30))
+     ylim =c(7, 17))
 #add y axis
-axis(2, seq(5,30, by=5), las=2 )
+axis(2, seq(7,17, by=1), las=2 )
 #add new york
 points(ny$year, ny$TMAX,
        type = "b",
@@ -252,11 +252,10 @@ datTMIN <- na.omit(data.frame(NAME=datW$NAME,
                            TMIN=datW$TMIN))
 
 subTMIN <- datTMIN[datTMIN$NAME == nameS[2] & datTMIN$year >= 2000,]
+subTMIN$year<- as.factor(subTMIN$year)
+subTMIN$DATE <- as.Date(subTMIN$DATE,"%Y-%m-%d")
 
-ggplot(data=subTMIN, aes(x=year, y=TMIN))+
-  geom_point()+
-  theme_classic()+
-  labs(x="year", y="Minimum temperature (C)")
-
-
-
+ggplot(data = subTMIN, aes(x=year, y=TMIN))+ #look at daily tmin
+  geom_violin(fill=rgb(0.933,0.953,0.98))+ #add a violin plot with blue color
+  geom_boxplot(width=0.2,size=0.25, fill="grey90")+ #add grey boxplots and make them about 20% smaller than normal with 25% thinner lines than normal
+  theme_classic() #git rid of ugly gridlines
