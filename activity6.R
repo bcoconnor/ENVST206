@@ -62,5 +62,35 @@ gdf15 <- data.frame(GLACNAME = g2015@data$GLACNAME,
 #join all data tables by glacier name
 gAll <- full_join(gdf66,gdf15, by="GLACNAME")
 
+#question 7
+#calculate the % change in area from 1966 to 2015
+gAll$gdiff <- ((gAll$area66-gAll$area15)/gAll$area66)*100
+
+plot(gAll$area66, gAll$gdiff, 
+     pch = 19, 
+     col = "royalblue4",
+     ylab = "Percent Change in Area",
+     xlab =  "Glacier Area in 1966",
+     main = "Percent Change in Area vs. Glacier Area in 1966")
+
+
+#join data with the spatial data table and overwrite into spatial data table 
+g1966@data <- left_join(g1966@data, gAll, by="GLACNAME")
+#use spplot to shade polygons based on the % change of labels
+#first argument is the spatial object
+#second is the column in of data to display with the different colors
+#add a title using main
+#col changes the color of the borders. This argument sets them to transparent
+spplot(g1966, "gdiff", main="% change in area", col="transparent")
+
+#look at the Vulture glacier in 1966
+vulture66 <- g1966[g1966@data$GLACNAME == "Vulture Glacier",]
+plot(vulture66, main = "Vulture Glacier in 1966", col="slategray")
+
+#question 8
+#mean and standard deviation
+mean(gAll$gdiff)
+sd(gAll$gdiff)
+
 
 
