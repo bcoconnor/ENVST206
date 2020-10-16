@@ -70,7 +70,7 @@ plot(gAll$area66, gAll$gdiff,
      pch = 19, 
      col = "royalblue4",
      ylab = "Percent Change in Area",
-     xlab =  "Glacier Area in 1966",
+     xlab =  "Glacier Area in 1966 (km)",
      main = "Percent Change in Area vs. Glacier Area in 1966")
 
 
