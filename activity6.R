@@ -92,5 +92,19 @@ plot(vulture66, main = "Vulture Glacier in 1966", col="slategray")
 mean(gAll$gdiff)
 sd(gAll$gdiff)
 
+#question 9
+#largest % loss
+boulder66 <- g1966[g1966@data$GLACNAME == "Boulder Glacier",]
+boulder15 <- g2015[g2015@data$GLACNAME == "Boulder Glacier",]
+plot(boulder66, main = "Boulder Glacier Area 1966 and 2015", col="slategray")
+plot(boulder15, add=TRUE, col="orange")
+legend("bottomleft", c("Boulder Glacier 1966", "Boulder Glacier 2015"), fill=c("slategray", "orange"), bty="n")
+
+#smallest % loss
+pumpelly66 <- g1966[g1966@data$GLACNAME == "Pumpelly Glacier",]
+pumpelly15 <- g2015[g2015@data$GLACNAME == "Pumpelly Glacier",]
+plot(pumpelly66, main = "Pumpelly Glacier Area 1966 and 2015", col="slategray")
+plot(pumpelly15, add=TRUE, col="orange")
+legend("bottomright", c("Pumpelly Glacier 1966", "Pumpelly Glacier 2015"), fill=c("slategray", "orange"), bty="n")
 
 
