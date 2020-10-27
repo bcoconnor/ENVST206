@@ -19,7 +19,7 @@ plot(rdatB2/10000)
 #stack red green blue, divide to convert to reflectance
 rgbS <- stack(rdatB4,rdatB3,rdatB2)/10000
 
-#view raster, a few pixels in blue have reflectanc above 1 so set scale
+#view raster, a few pixels in blue have reflectance above 1 so set scale
 plotRGB(rgbS, scale=2)
 
 #don't need the scale argument when adding in the contrast stretch
