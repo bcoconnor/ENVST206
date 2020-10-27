@@ -48,7 +48,6 @@ plot(NDVI)
 
 
 #read in landcover points data
-#you may have to change your slash direction if you are on a windows computer
 #I've also turned off the info print out here when you read in the file
 algae <- readOGR(paste0(dirR,"/Oneida/algae.shp"), verbose=FALSE)
 agri <- readOGR(paste0(dirR,"/Oneida/agriculture.shp"), verbose=FALSE)
@@ -77,7 +76,7 @@ help(rep)
 
 
 #stack all bands
-allbands <-  stack(rdatB2, rdatB3, rdatB4,rdatB8)/10000
+allbands <-  stack(rdatB2,rdatB3,rdatB4,rdatB8)/10000
 #add the raster reflectance values to the point coordinates and classes
 #extract(raster, matrix of coordinates)
 #raster:: helps ensure that extract comes from the raster package
@@ -93,6 +92,23 @@ head(rasterEx)
 ggplot(data=rasterEx, aes(x=B02, y=B03, color=landcID))+
   geom_point(alpha=0.6)+
   theme_classic()
+
+#question 7
+#visible light vs near infrared reflectance
+ggplot(data=rasterEx, aes(x=B08, y=B02, color=landcID))+
+  geom_point(alpha=0.6)+
+  theme_classic()
+
+ggplot(data=rasterEx, aes(x=B08, y=B03, color=landcID))+
+  geom_point(alpha=0.6)+
+  theme_classic()
+
+ggplot(data=rasterEx, aes(x=B08, y=B04, color=landcID))+
+  geom_point(alpha=0.6)+
+  theme_classic()
+
+
+#question 8
 
 
 
