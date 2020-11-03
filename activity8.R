@@ -110,13 +110,15 @@ ggplot(data=rasterEx, aes(x=B08, y=B04, color=landcID))+
 
 #question 8
 landcoverpoints <- raster::extract(NDVI,landExtract[,2:3])
-NDVI <- cbind(landExtract,landcoverpoints)
+NDVIraster <- cbind(landExtract,landcoverpoints)
 
-head(NDVI)
+head(NDVIraster)
 
-ggplot(data=NDVI[NDVI$landcID==c("agri","forest","wetland"),], aes(x=landcID, y=NDVI), fill=landcoverpoints)+
+ggplot(data=NDVIraster[NDVIraster$landcID==c("agri","forest","wetland"),], 
+       aes(x=landcID, y=landcoverpoints), fill=landcoverpoints)+
   geom_boxplot(width=.1)+
   geom_violin(alpha=.2)+
   theme_classic()
+
 
 
