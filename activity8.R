@@ -5,7 +5,7 @@ library(ggplot2)
 library(rgdal)
 
 #set up directory for oneida data folder
-dirR <- "/Users/brynnoconnor/Documents/ENVSTDATA/ao8/a08/oneida"
+dirR <- "/Users/brynnoconnor/Documents/ENVSTDATA/ao8/oneida"
 
 #read in Sentinel data
 
@@ -88,10 +88,10 @@ rasterEx <- cbind(landExtract,ExtractOut)
 #look at data
 head(rasterEx)
 
-
 ggplot(data=rasterEx, aes(x=B02, y=B03, color=landcID))+
   geom_point(alpha=0.6)+
   theme_classic()
+
 
 #question 7
 #visible light vs near infrared reflectance
@@ -109,9 +109,12 @@ ggplot(data=rasterEx, aes(x=B08, y=B04, color=landcID))+
 
 
 #question 8
+landcover_points <- raster::extract(NDVI,landExtract[,2:3])
+NDVI <- cbind(NDVI,landcover_points)
 
-
-
-
+ggplot(data=NDVI[NDVI$landcover_points==c("agri","forest","wetland"),], aes(x=landcover_points, y=NDVI), fill=landcover_points)+
+  geom_boxplot(width=.1)+
+  geom_violin(alpha=.2)+
+  theme_classic()
 
 
