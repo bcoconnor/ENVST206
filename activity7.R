@@ -51,6 +51,7 @@ plot(faults, col="skyblue", add=TRUE)
 #volcanic and faults?
 #geothermal and volcanic
 #volcanic points vs volcanic 
+
 help(crop)
 
 plot(volcanic2,
@@ -67,6 +68,7 @@ plot(volcanic2, add = TRUE)
 
 
 #how to convret spatial data to a dataframe
+#(SpatialDataPointsFrame)
 chisq.test(geothermal_area)
 help("chisq.test")
 
