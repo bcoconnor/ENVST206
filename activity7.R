@@ -4,6 +4,9 @@ library(sp)
 library(rgdal)
 #data manangement package
 library(dplyr)
+#install.packages("rgeos")
+library(raster)
+library(rgeos)
 
 geothermal <- readOGR("/Users/brynnoconnor/Documents/ENVSTDATA/ao7/Geothermal/Geothermal.shp")
 caldera <- readOGR("/Users/brynnoconnor/Documents/ENVSTDATA/ao7/Caldera/calderas.shp")
@@ -48,5 +51,21 @@ plot(faults, col="skyblue", add=TRUE)
 #volcanic and faults?
 #geothermal and volcanic
 #volcanic points vs volcanic 
+help(crop)
+
+plot(volcanic2,
+     main = "Shapefile imported into R - crop extent",
+     axes = TRUE,
+     border = "blue")
+
+# crop the lidar raster using the vector extent
+geothermal_crop <- crop(geothermal, volcanic2)
+plot(geothermal_crop, main = "Cropped geothermal areas")
+
+# add shapefile on top of the existing raster
+plot(volcanic2, add = TRUE)
+
+
+
 
 
