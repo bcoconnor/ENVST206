@@ -66,6 +66,27 @@ plot(geothermal_crop, main = "Cropped geothermal areas")
 plot(volcanic2, add = TRUE)
 
 
+#how to convret spatial data to a dataframe
+chisq.test(geothermal_area)
+help("chisq.test")
+
+
+
+plot(faults,
+     main = "Shapefile imported into R - crop extent",
+     axes = TRUE,
+     border = "blue")
+
+# crop the lidar raster using the vector extent
+geothermal_crop_faults <- crop(geothermal, faults)
+plot(geothermal_crop_faults, main = "Cropped geothermal areas")
+
+# add shapefile on top of the existing raster
+plot(faults, add = TRUE)
+
+
+
+
 
 
 
