@@ -46,45 +46,39 @@ plot(volcanic2,
      axes = TRUE,
      border = "blue")
 
+
+
 #create new dataframe
-geo_results <- data.frame("Feature"=NA, "Inside"=NA, "Outside"=NA)
-#remove empty row at top
-geo_results <- na.omit(geo_results)
+geo_results <- data.frame(Feature=NA, Inside=NA, Outside=NA)
 
 # crop volcanic2 raster using the vector extent
 caldera_crop <- crop(geothermal, caldera)
-caldera_result <- c("Caldera", NROW(caldera_crop), NROW(caldera))
+caldera_result <- c("Caldera", NROW(caldera_crop), NROW(caldera)-NROW(caldera_crop))
 geo_results <- rbind(geo_results, caldera_result)
 
 volcanic_crop <- crop(geothermal, volcanic)
-volcanic_result <- c("Volcanic Points", NROW(volcanic_crop), NROW(volcanic))
+volcanic_result <- c("Volcanic Points", NROW(volcanic_crop), NROW(volcanic)-NROW(volcanic_crop))
 geo_results <- rbind(geo_results, volcanic_result)
 
 faults_crop <- crop(geothermal, faults)
-faults_result <- c("Faults", NROW(faults_crop), NROW(faults))
+faults_result <- c("Faults", NROW(faults_crop), NROW(faults)-NROW(faults_crop))
 geo_results <- rbind(geo_results, faults_result)
 
 glacier_crop <- crop(geothermal, glacier)
-glacier_result <- c("Glacier", NROW(glacier_crop), NROW(glacier))
+glacier_result <- c("Glacier", NROW(glacier_crop), NROW(glacier)-NROW(glacier_crop))
 geo_results <- rbind(geo_results, glacier_result)
 
 streams_crop <- crop(geothermal, streams)
-streams_result <- c("Streams", NROW(streams_crop), NROW(streams))
+streams_result <- c("Streams", NROW(streams_crop), NROW(streams)-NROW(streams_crop))
 geo_results <- rbind(geo_results, streams_result)
 
+#remove empty row at top
+geo_results <- na.omit(geo_results)
 
 
+#chi-sq test on dataframe of results
+chisq.test(x=geo_results$Inside, y=geo_results$Outside)
 
-
-plot(geothermal_crop, main = "Cropped geothermal areas")
-
-# add shapefile on top of the existing raster
-plot(volcanic2, add = TRUE)
-
-
-#how to convret spatial data to a dataframe
-chisq.test(geo_results$inside, geo_results$outside)
-help("chisq.test")
 
 
 plot(faults,
@@ -96,5 +90,15 @@ plot(faults,
 geothermal_crop_faults <- crop(geothermal, faults)
 plot(geothermal_crop_faults, main = "Cropped geothermal areas")
 
+plot(geothermal_crop, main = "Cropped geothermal areas")
+
+# add shapefile on top of the existing raster
+plot(volcanic2, add = TRUE)
+
+
 # add shapefile on top of the existing raster
 plot(faults, add = TRUE)
+
+
+
+
